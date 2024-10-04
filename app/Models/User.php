@@ -7,41 +7,58 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use  HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
+        'nama',
+        'nomor_induk',
+        'id_kelas',
+        'no_hp',
         'email',
         'password',
+        'roles_id',
+        'file_eraport',
+        'file_sertifikat',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
-     * @return array<string, string>
+     * @var array<string, string>
      */
-    protected function casts(): array
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    //     'password' => 'hashed',
+    // ];
+
+    public function Arsip()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Arsip::class);
     }
+    public function Nilai()
+    {
+        return $this->hasMany(Nilai::class);
+    }
+    public function JadwalPelajaran()
+    {
+        return $this->hasMany(JadwalPelajaran::class);
+    }
+    public function Jurusan()
+    {
+        return $this->hasMany(Jurusan::class);
+    }
+    public function Kelas()
+    {
+        return $this->belongsTo(Jurusan::class, 'id_kelas', 'id');
+    }
+
+
 }
