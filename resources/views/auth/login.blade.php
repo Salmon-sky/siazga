@@ -9,12 +9,48 @@
     <!-- Font Awesome CSS for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <link rel="stylesheet" href="{{asset('assets/css/login/style.css')}}">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f8f9fa;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .card {
+        background-color: #086623;
+        color: white;
+      }
+
+      .logo {
+        max-width: 350px;
+        height: auto;
+        margin-right: 50px;
+      }
+
+      .btn-center {
+        display: block;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
 
-  <div class="container d-flex align-items-center justify-content-center">
-    <img src="{{ asset('assets/img/YAL.png') }}" alt="" class="logo img-fluid" style="max-width: 350px; height: auto; margin-right: 50px;" />
-    <div class="card p-5 rounded" style="background-color: #086623; color: white;">
+  <div class="container">
+    <img src="{{ asset('assets/img/YAL.png') }}" alt="" class="logo img-fluid" />
+    <div class="card p-5 rounded">
         <h4 class="fw-bolder text-center">LOGIN SIAZGA</h4>
         <form action="{{ route('login') }}" method="POST">
             @csrf

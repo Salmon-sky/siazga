@@ -6,7 +6,6 @@
 
 @section('content')
 
-@if (auth()->user()->roles_id == 1 or auth()->user()->roles_id == 2)
 <div class="row">
     <div class="col-lg-3 col-6">
         <!-- small box -->
@@ -16,7 +15,7 @@
 
                 <p>Jumlah Siswa</p>
             </div>
-            <a href="{{route('admin.siswa.index')}}"class="small-box-footer">More info <i
+            <a href="#"class="small-box-footer">More info <i
                     class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
@@ -29,7 +28,7 @@
 
                 <p>Jumlah Guru</p>
             </div>
-            <a href="{{route('admin.guru.index')}}" class="small-box-footer">More info <i
+            <a href="#" class="small-box-footer">More info <i
                     class="fas fa-arrow-circle-right"></i></a>
         </div>
     </div>
@@ -62,9 +61,4 @@
     <!-- ./col -->
 </div>
 
-@elseif (auth()->user()->roles_id == 3)
-<h1>{{$pengumumans->judul}}</h1>
-
-<iframe src="{{asset('assets/img/'.$pengumumans->img)}}"  width="100%" height="600px"></iframe>
-@endif
 @endsection
