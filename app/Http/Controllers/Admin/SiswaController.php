@@ -25,10 +25,10 @@ class SiswaController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nomor_induk' => 'required',
-            'no_hp' => 'required',
+            'nomor_induk' => 'required|unique:users,nomor_induk',
+            'no_hp' => 'required|unique:users,no_hp',
             'id_kelas' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:users,email',
         ]);
 
         $siswa = User::create([
@@ -71,9 +71,9 @@ class SiswaController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nomor_induk' => 'required',
-            'no_hp' => 'required',
-            'email' => 'required',
+            'nomor_induk' => 'required|unique:users,nomor_induk,' . $id,
+            'no_hp' => 'required|unique:users,no_hp,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
         ]);
 
         $siswa = User::findOrFail($id);

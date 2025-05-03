@@ -8,22 +8,24 @@ use App\Models\Pengumuman;
 
 class PengumumanController extends Controller
 {
-   
+
     public function index()
     {
         $pengumumans = Pengumuman::latest('id')->get();
-       return view('admin.pengumuman.index', compact('pengumumans'));
+        return view('admin.pengumuman.index', compact('pengumumans'));
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required',
+            'judul' => 'required|unique:pengumuman,judul',
+        ], [
+            'judul.unique' => 'Judul pengumuman sudah digunakan.',
         ]);
-        
+
         $pengumuman = Pengumuman::create([
             'judul' => $request->judul,
-            
+
         ]);
         if ($request->hasFile('img')) {
             $img = $request->file('img');
@@ -39,19 +41,21 @@ class PengumumanController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'judul' => 'required'
+            'judul' => 'required|unique:pengumuman,judul,' . $id,
+        ], [
+            'judul.unique' => 'Judul pengumuman sudah digunakan.',
         ]);
-    
+
         $pengumuman = Pengumuman::findOrFail($id);
         $pengumuman->update($request->all());
-    
+
         return back()->with('sukses', 'Berhasil Edit Data Pengumuman!');
     }
     public function destroy($id)
     {
         $pengumuman = Pengumuman::findOrFail($id);
         $pengumuman->delete();
-    
+
         return back()->with('sukses', 'Data pengumuman berhasil dihapus.');
     }
 }

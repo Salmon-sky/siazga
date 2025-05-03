@@ -11,7 +11,6 @@ use App\Imports\UserImport;
 
 class GuruController extends Controller
 {
-
     public function index()
     {
         $gurus = User::where('roles_id', 2)->latest('id')->get();
@@ -22,12 +21,16 @@ class GuruController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nomor_induk' => 'required',
-            'no_hp' => 'required',
-            'email' => 'required',
+            'nomor_induk' => 'required|unique:users,nomor_induk',
+            'no_hp' => 'required|unique:users,no_hp',
+            'email' => 'required|email|unique:users,email',
+        ], [
+            'nomor_induk.unique' => 'Nomor induk sudah digunakan.',
+            'no_hp.unique' => 'Nomor handphone sudah digunakan.',
+            'email.unique' => 'Email sudah digunakan.',
         ]);
 
-        $guru = User::create([
+        User::create([
             'nama' => $request->nama,
             'roles_id' => 2,
             'nomor_induk' => $request->nomor_induk,
@@ -36,15 +39,20 @@ class GuruController extends Controller
             'password' => Hash::make('password'),
         ]);
 
-        return back()->with('sukses', 'Berhasil Tambah !');
+        return back()->with('sukses', 'Berhasil Tambah Guru!');
     }
+
     public function update(Request $request, $id)
     {
         $request->validate([
             'nama' => 'required',
-            'nomor_induk' => 'required',
-            'no_hp' => 'required',
-            'email' => 'required',
+            'nomor_induk' => 'required|unique:users,nomor_induk,' . $id,
+            'no_hp' => 'required|unique:users,no_hp,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
+        ], [
+            'nomor_induk.unique' => 'Nomor induk sudah digunakan.',
+            'no_hp.unique' => 'Nomor handphone sudah digunakan.',
+            'email.unique' => 'Email sudah digunakan.',
         ]);
 
         $guru = User::findOrFail($id);
