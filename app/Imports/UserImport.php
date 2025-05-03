@@ -6,32 +6,40 @@ use App\Models\User;
 use App\Models\Jurusan;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
-use Illuminate\Support\Str;
 
 class UserImport implements ToModel, WithStartRow
 {
     public function model(array $row)
     {
-        // Validasi sederhana untuk mencegah error
+        // Validasi sederhana
         if (!isset($row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8])) {
             return null;
         }
 
-        // Cek dan buat jurusan (kelas) jika belum ada
+        // Pastikan nomor_induk tidak duplikat di database
+        $existingNomorInduk = User::where('nomor_induk', $row[2])
+            ->where('email', '!=', $row[6]) // agar tidak bentrok saat update user yg sama
+            ->exists();
+
+        if ($existingNomorInduk) {
+            return null; // Skip jika nomor_induk sudah dipakai user lain
+        }
+
+        // Cek atau buat jurusan
         $kelas = Jurusan::firstOrCreate(
             ['nama' => $row[3], 'kelas' => $row[4]],
-            ['wali_kelas' => 4] // <- bisa diganti nilai dinamis jika perlu
+            ['wali_kelas' => 4]
         );
 
-        // Konversi role
+        // Konversi role dari teks ke angka
         $roleString = strtolower(trim($row[8]));
         $roleMap = [
             'guru' => 2,
             'siswa' => 3,
         ];
-        $role = $roleMap[$roleString] ?? 3; // Default ke siswa jika tidak dikenal
+        $role = $roleMap[$roleString] ?? 3;
 
-        // Cek apakah user sudah ada
+        // Cek user berdasarkan email
         $checkUser = User::where('email', $row[6])->first();
 
         $data = [
@@ -57,6 +65,6 @@ class UserImport implements ToModel, WithStartRow
 
     public function startRow(): int
     {
-        return 3; // Memulai dari baris ke-3 (mengabaikan header dan contoh)
+        return 3;
     }
 }
