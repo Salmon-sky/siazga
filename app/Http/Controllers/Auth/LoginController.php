@@ -3,33 +3,50 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
-    public function showLoginForm()
-    {
-        return view('auth.login'); // Mengarah ke view login
+    /*
+    |--------------------------------------------------------------------------
+    | Login Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles authenticating users for the application and
+    | redirecting them to your home screen. The controller uses a trait
+    | to conveniently provide its functionality to your applications.
+    |
+    */
+
+    use AuthenticatesUsers;
+
+    public function forgot_password(){
+        return view('auth.forgot-password');
     }
-
-    public function login(Request $request)
+    
+    public function redirectTo()
     {
-        // Validasi input
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-        ]);
-
-        // Mencoba autentikasi pengguna
-        if (Auth::attempt($request->only('email', 'password'))) {
-            // Jika berhasil login, arahkan ke dashboard
-            return redirect()->intended('dashboard');
+        switch(auth()->user()->roles_id){
+            case 1:
+                $this->redirectTo = '/admin/dashboard';
+                return $this->redirectTo;
+                break;
+            case 2:
+                $this->redirectTo = '/guru/dashboard';
+                return $this->redirectTo;
+                break;
+            case 3:
+                $this->redirectTo = '/siswa/dashboard';
+                return $this->redirectTo;
+                break;
+            default:
+                $this->redirectTo = '/login';
+                return $this->redirectTo;
         }
-
-        // Jika gagal login, kembalikan ke halaman login dengan pesan error
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ]);
+    }
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+        $this->middleware('auth')->only('logout');
     }
 }

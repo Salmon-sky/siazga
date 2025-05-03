@@ -10,7 +10,7 @@ class Jurusan extends Model
     use HasFactory;
 
     protected $table = 'jurusan';
-    protected $fillable = ['nama','kelas'];
+    protected $fillable = ['nama','kelas','wali_kelas'];
 
     public function JadwalPelajaran()
     {
@@ -19,5 +19,10 @@ class Jurusan extends Model
     public function Siswa()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function WaliKelas()
+    {
+        return $this->belongsTo(User::class, 'wali_kelas');
     }
 }

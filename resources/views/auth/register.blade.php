@@ -15,8 +15,8 @@
       <div class="logo-container">
         <img src="{{asset('assets/img/icontutwuri.png')}}" alt="Tut Wuri Handayani" class="logo" />
         <div class="school-name">
-          <p class="bold-text m-0">SMK NEGERI 1</p>
-          <p class="bold-text m-0">MUARA</p>
+          <p class="bold-text m-0">SMA AL-AZHAR 3</p>
+          <p class="bold-text m-0">BANDAR LAMPUNG</p>
         </div>
       </div>
 

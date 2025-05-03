@@ -22,6 +22,7 @@ class User extends Authenticatable
         'roles_id',
         'file_eraport',
         'file_sertifikat',
+        'img',
     ];
 
     protected $hidden = [
@@ -30,19 +31,13 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
-     *
      * @var array<string, string>
      */
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    //     'password' => 'hashed',
-    // ];
+     protected $casts = [
+         'email_verified_at' => 'datetime',
+         'password' => 'hashed',
+    ];
 
-    public function Arsip()
-    {
-        return $this->hasMany(Arsip::class);
-    }
     public function Nilai()
     {
         return $this->hasMany(Nilai::class);

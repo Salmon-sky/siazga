@@ -9,7 +9,7 @@ use Carbon\Carbon;
 
 class PresensiSeeder extends Seeder
 {
-    
+
     public function run(): void
     {
 
@@ -17,14 +17,46 @@ class PresensiSeeder extends Seeder
 
         $Presensi = [
             [
-                'id_siswa' => 8,
+                'id_siswa' => 21,
                 'id_mapel' => 1,
                 'status' => 'Hadir',
                 'created_at' => $tanggalSekarang->toDateTimeString(),
                 'updated_at' => $tanggalSekarang->toDateTimeString(),
             ],
             [
-                'id_siswa' => 9,
+                'id_siswa' => 22,
+                'id_mapel' => 1,
+                'status' =>'Telat',
+                'created_at' => $tanggalSekarang->toDateTimeString(),
+                'updated_at' => $tanggalSekarang->toDateTimeString(),
+
+            ],
+            [
+                'id_siswa' => 23,
+                'id_mapel' => 1,
+                'status' =>'Telat',
+                'created_at' => $tanggalSekarang->toDateTimeString(),
+                'updated_at' => $tanggalSekarang->toDateTimeString(),
+
+            ],
+            [
+                'id_siswa' => 24,
+                'id_mapel' => 1,
+                'status' =>'Telat',
+                'created_at' => $tanggalSekarang->toDateTimeString(),
+                'updated_at' => $tanggalSekarang->toDateTimeString(),
+
+            ],
+            [
+                'id_siswa' => 25,
+                'id_mapel' => 1,
+                'status' =>'Telat',
+                'created_at' => $tanggalSekarang->toDateTimeString(),
+                'updated_at' => $tanggalSekarang->toDateTimeString(),
+
+            ],
+            [
+                'id_siswa' => 26,
                 'id_mapel' => 1,
                 'status' =>'Telat',
                 'created_at' => $tanggalSekarang->toDateTimeString(),

@@ -15,6 +15,7 @@
             <h3 class="card-title">Kelola Data Guru</h3>
             <div class="d-flex justify-content-end mb-3">
 
+              @include('admin.guru.import')
               @include('admin.guru.create')
 
           </div>
@@ -73,7 +74,7 @@
     <!-- /.row -->
   </section>
   <!-- /.content -->
-  
+
 @endsection
 
 @section('script')

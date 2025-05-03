@@ -6,11 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin | @yield('title')</title>
 
-    <link
-      rel="stylesheet"
-      href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"
-    />
-    
+    <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css" />
+
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -42,20 +39,16 @@
     <!--Favicon-->
     {{-- <link rel="icon" href="{{ asset('favicon/favicon.ico') }}" type="image/x-icon"> --}}
     <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
-    <link rel="apple-touch-icon-precomposed" sizes="57x57"
-        href="{{ asset('favicon/apple-touch-icon-57x57.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ asset('favicon/apple-touch-icon-57x57.png') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="114x114"
         href="{{ asset('favicon/apple-touch-icon-114x114.png') }}" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72"
-        href="{{ asset('favicon/apple-touch-icon-72x72.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('favicon/apple-touch-icon-72x72.png') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
         href="{{ asset('favicon/apple-touch-icon-144x144.png') }}" />
-    <link rel="apple-touch-icon-precomposed" sizes="60x60"
-        href="{{ asset('favicon/apple-touch-icon-60x60.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="{{ asset('favicon/apple-touch-icon-60x60.png') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="120x120"
         href="{{ asset('favicon/apple-touch-icon-120x120.png') }}" />
-    <link rel="apple-touch-icon-precomposed" sizes="76x76"
-        href="{{ asset('favicon/apple-touch-icon-76x76.png') }}" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="{{ asset('favicon/apple-touch-icon-76x76.png') }}" />
     <link rel="apple-touch-icon-precomposed" sizes="152x152"
         href="{{ asset('favicon/apple-touch-icon-152x152.png') }}" />
     <link rel="icon" type="image/png" href="{{ asset('favicon/favicon-196x196.png') }}" sizes="196x196" />
@@ -89,14 +82,14 @@
                     <p class="text-white fw-bold" style="margin-top:-10px;">
                         SMA AL-AZHAR 3 BANDAR LAMPUNG
                     </p>
-                </li>                
+                </li>
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <div class="user-panel d-flex">
-                        
+
                     </div>
                 </li>
             </ul>
@@ -107,9 +100,10 @@
             <!-- Brand Logo -->
             <section class="hero-section">
                 <div class="container">
-                    <img src="{{asset('assets/img/SIAZGA.jpg')}}" alt="Gambar" class="img-fluid w-100" style="max-width: 200px;">
-                 </div>
-             </section> 
+                    <img src="{{ asset('assets/img/SIAZGA.jpg') }}" alt="Gambar" class="img-fluid w-100"
+                        style="max-width: 200px;">
+                </div>
+            </section>
             <!-- Sidebar -->
             <div class="sidebar">
                 @include('layouts.admin.menu')
@@ -120,7 +114,7 @@
         <div class="content-wrapper mt-5 pt-3"
             style="background-image: url('{{ asset('img/bg.jpg') }}'); background-size: 165%; background-repeat: no-repeat; background-position: right;">
             <!-- Content Header (Page header) -->
-            <div class="content-header">
+            <div class="content-header mt-3">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
@@ -130,7 +124,15 @@
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                                <li class="breadcrumb-item"><a href="#">
+                                        @if (auth()->user()->roles_id == 1)
+                                            Admin
+                                        @elseif(auth()->user()->roles_id == 2)
+                                            Guru
+                                        @elseif(auth()->user()->roles_id == 3)
+                                            Siswa
+                                        @endif
+                                    </a></li>
                                 <li class="breadcrumb-item active">@yield('title')</li>
                             </ol>
                         </div><!-- /.col -->
