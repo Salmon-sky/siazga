@@ -21,7 +21,7 @@
                         <td>
                             <a href="{{ route('siswa.semester.detail', $semester->id) }}"><i class="fas fa-eye"></i></a>
                         </td>
-                        <td>{{ $semester->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
+                        <td>{{ $semester->is_active == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                     </tr>
                 @endforeach
             </tbody>
