@@ -44,6 +44,7 @@
                                     <th>No</th>
                                     <th>Semester</th>
                                     <th>Aksi</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,6 +56,7 @@
                                             @include('admin.semester.edit')
                                             @include('admin.semester.delete')
                                         </td>
+                                        <td>{{ $semester->is_active == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -63,6 +65,7 @@
                                     <th>No</th>
                                     <th>Semester</th>
                                     <th>Aksi</th>
+                                    <th>Status</th>
                                 </tr>
                             </tfoot>
                         </table>
