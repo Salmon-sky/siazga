@@ -16,6 +16,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Kelola Data Nilai</h3>
                         <div class="d-flex justify-content-end mb-3">
+                            @include('admin.nilai.create', ['students' => $students, 'mapels' => $mapels, 'teachers'=>$gurus])
                         </div>
                     </div>
                     @if (session('sukses'))

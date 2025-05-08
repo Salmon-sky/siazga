@@ -49,7 +49,7 @@ class SemesterController extends Controller
             Semester::where('is_active', 1)->update(['is_active' => 0]);
             Semester::create([
                 'nama'      => $request->nama,
-                'is_active' => 1,
+                'is_active' => true,
             ]);
             DB::commit();
         } catch (\Throwable $th) {
@@ -64,7 +64,7 @@ class SemesterController extends Controller
     {
         $request->validate([
             'nama'      => 'required|unique:semester,nama,' . $id,
-            'is_active' => 'required', 
+            'is_active' => 'required',
         ], [
             'nama.unique' => 'Nama semester sudah digunakan.',
         ]);

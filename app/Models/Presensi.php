@@ -11,7 +11,7 @@ class Presensi extends Model
     use HasFactory;
 
     protected $table = 'presensis';
-    protected $fillable = ['id_siswa', 'id_mapel', 'status','created_at', 'updated_at'];
+    protected $fillable = ['id_siswa', 'id_mapel', 'status','created_at', 'updated_at', 'semester_id'];
 
     public function Siswa()
     {

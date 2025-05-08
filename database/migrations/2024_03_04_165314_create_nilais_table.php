@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_siswa');
             $table->foreignId('id_mapel');
-            $table->foreignId('id_semester');
             $table->foreignId('id_guru');
-            $table->integer('tugas');
-            $table->integer('uts');
-            $table->integer('uas');
-            $table->string('keterangan');
+            $table->integer('tugas')->nullable();
+            $table->integer('uts')->nullable();
+            $table->integer('uas')->nullable();
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }

@@ -11,7 +11,7 @@ class JadwalPribadi extends Model
     use HasFactory;
 
     protected $table = 'jadwal_pribadi';
-    protected $fillable = ['jam_ke', 'id_kelas', 'id_mapel', 'id_guru', 'hari', 'jam_mulai', 'jam_selesai'];
+    protected $fillable = ['jam_ke', 'id_kelas', 'id_mapel', 'id_guru', 'hari', 'jam_mulai', 'jam_selesai', 'semester_id'];
 
     public function jurusan()
     {

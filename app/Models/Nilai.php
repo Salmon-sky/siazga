@@ -11,7 +11,7 @@ class Nilai extends Model
     use HasFactory;
 
     protected $table = 'nilais';
-    protected $fillable = ['id_siswa', 'id_mapel', 'id_semester', 'id_guru', 'tugas', 'uts', 'uas', 'keterangan'];
+    protected $fillable = ['id_siswa', 'id_mapel', 'id_semester', 'id_guru', 'tugas', 'uts', 'uas', 'keterangan', 'semester_id'];
 
     public function Siswa()
     {
@@ -32,7 +32,7 @@ class Nilai extends Model
     }
     public function Semester()
     {
-        return $this->belongsTo(Semester::class, 'id_semester', 'id');
+        return $this->belongsTo(Semester::class, 'semester_id', 'id');
     }
 
     public function user()

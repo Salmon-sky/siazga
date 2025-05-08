@@ -1,26 +1,24 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\ArsipController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GuruController;
+use App\Http\Controllers\Admin\JadwalPelajaranController;
+use App\Http\Controllers\Admin\JadwalPribadiController;
+use App\Http\Controllers\Admin\MapelController;
+use App\Http\Controllers\Admin\NilaiController;
+use App\Http\Controllers\Admin\PengumumanController;
+use App\Http\Controllers\Admin\PresensiController;
+use App\Http\Controllers\Admin\ProfilController;
+use App\Http\Controllers\Admin\SemesterController;
+use App\Http\Controllers\Admin\SiswaController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Guru;
 use App\Http\Middleware\Siswa;
-
-use App\Http\Controllers\Admin\MapelController;
-use App\Http\Controllers\Auth\RegistrasiController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\PresensiController;
-use App\Http\Controllers\Admin\JadwalPelajaranController;
-use App\Http\Controllers\Admin\NilaiController;
-use App\Http\Controllers\Admin\ArsipController;
-use App\Http\Controllers\Admin\GuruController;
-use App\Http\Controllers\Admin\SiswaController;
-use App\Http\Controllers\Admin\PengumumanController;
-use App\Http\Controllers\Admin\SemesterController;
-use App\Http\Controllers\Admin\ProfilController;
-use App\Http\Controllers\Admin\JadwalPribadiController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +89,7 @@ Route::middleware(['auth'])->group(function () {
 
         // CMS NILAI
         Route::get('/nilai', [NilaiController::class, 'index'])->name('nilai.index');
+        Route::post('/nilai', [NilaiController::class, 'store'])->name('nilai.store');
         Route::get('/tabel-nilai/{id}', [NilaiController::class, 'show'])->name('nilai.tabel');
         Route::put('/tabel-nilai/{id}/update', [NilaiController::class, 'update'])->name('nilai.update');
 
@@ -136,7 +135,6 @@ Route::middleware(['auth'])->group(function () {
         // view arsip
         Route::get('/arsip', [ArsipController::class, 'arsip'])->name('arsip.arsip');
 
-
         // view profil
 
         Route::get('/profil/{id}', [ProfilController::class, 'edit'])->name('profil.edit');
@@ -158,6 +156,5 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/mapel', [MapelController::class, 'index'])->name('mapel.index');
 Route::get('/jadwal-pribadi', [JadwalPribadiController::class, 'index'])->name('jadwal-pribadi.index');
 Route::get('/forgot-password', [ForgotPasswordController::class, 'forgot_password'])->name('forgot-password');
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

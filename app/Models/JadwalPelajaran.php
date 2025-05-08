@@ -11,7 +11,7 @@ class JadwalPelajaran extends Model
     use HasFactory;
 
     protected $table = 'jadwal_pelajaran';
-    protected $fillable = ['jam_ke','id_kelas','id_mapel', 'id_guru', 'hari', 'jam_mulai', 'jam_selesai'];
+    protected $fillable = ['jam_ke','id_kelas','id_mapel', 'id_guru', 'hari', 'jam_mulai', 'jam_selesai', 'semester_id'];
 
     public function Jurusan()
     {

@@ -10,7 +10,7 @@ class Semester extends Model
     use HasFactory;
 
     protected $table = 'semester';
-    protected $fillable = ['nama'];
+    protected $fillable = ['nama', 'is_active'];
 
     public function Nilai()
     {
