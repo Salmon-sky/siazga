@@ -33,7 +33,10 @@ class SemesterController extends Controller
     {
 
         $semester = Semester::findOrFail($id);
-        $nilais   = Nilai::withoutGlobalScope(new BySemesterScope)->where('semester_id', $id)->get();
+        $nilais   = Nilai::withoutGlobalScope( BySemesterScope::class)
+            ->where('semester_id', $semester->id)
+            ->with('Siswa')
+            ->get();
         return view('admin.semester.detail', compact('nilais', 'semester'));
     }
 

@@ -86,7 +86,7 @@
                             $count = 0;
                         @endphp
                         @foreach ($nilais as $nilai)
-                            @if ($nilai->id_semester == $semester->id && $nilai->Siswa->nomor_induk == auth()->user()->nomor_induk)
+                            @if ($nilai->Siswa->nomor_induk == auth()->user()->nomor_induk)
                                 @php
                                     $totalTugas += $nilai->tugas ?? 0;
                                     $totalUTS += $nilai->uts ?? 0;
