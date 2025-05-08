@@ -27,7 +27,7 @@ class NilaiController extends Controller
         $jadwals   = JadwalPelajaran::all();
         $nilais    = Nilai::query()->with(['Siswa'])->get();
 
-        $students = User::where('roles_id', 3)->get();
+        $students = User::where('roles_id', 3)->where('id_kelas', $id)->get();
         $mapels   = Mapel::all();
 
         // dd($nilais);
