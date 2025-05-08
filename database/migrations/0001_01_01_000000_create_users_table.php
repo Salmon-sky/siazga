@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('file_sertifikat')->nullable();
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('status');
+            $table->boolean('is_active')->default(1);
             $table->rememberToken(); // Tambahkan kolom remember_token
             $table->timestamps();
         });

@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MapelSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(JurusanSeeder::class);
+
         $semesters = Semester::all();
         foreach ($semesters as $semester) {
             $semester->update(['is_active' => 1]);
@@ -24,7 +25,8 @@ class DatabaseSeeder extends Seeder
             $this->call(PresensiSeeder::class);
             $semester->update(['is_active' => 0]);
         }
-        $semester->latest()->update(['is_active' => 1]);
+        Semester::latest('id')->first()->update(['is_active' => 1]);
+
         $this->call(PengumumanSeeder::class);
 
     }
