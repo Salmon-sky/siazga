@@ -63,15 +63,28 @@ class SemesterController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required|unique:semester,nama,' . $id,
+            'nama'      => 'required|unique:semester,nama,' . $id,
+            'is_active' => 'required', 
         ], [
             'nama.unique' => 'Nama semester sudah digunakan.',
         ]);
 
         $semester = Semester::findOrFail($id);
-        $semester->update([
-            'nama' => $request->nama,
-        ]);
+        try {
+            DB::beginTransaction();
+            if ($request->is_active == 1) {
+                Semester::where('is_active', 1)->update(['is_active' => 0]);
+            }
+
+            $semester->update([
+                'nama'      => $request->nama,
+                'is_active' => $request->is_active,
+            ]);
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return back()->with('gagal', 'Gagal Edit Semester!');
+        }
 
         return back()->with('sukses', 'Berhasil Edit Data Semester!');
     }
