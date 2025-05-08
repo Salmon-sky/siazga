@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Imports;
 
-use App\Models\User;
 use App\Models\Jurusan;
+use App\Models\User;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
@@ -12,7 +11,7 @@ class UserImport implements ToModel, WithStartRow
     public function model(array $row)
     {
         // Validasi sederhana
-        if (!isset($row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8])) {
+        if (! isset($row[1], $row[2], $row[3], $row[4], $row[5], $row[6], $row[7], $row[8])) {
             return null;
         }
 
@@ -33,8 +32,8 @@ class UserImport implements ToModel, WithStartRow
 
         // Konversi role dari teks ke angka
         $roleString = strtolower(trim($row[8]));
-        $roleMap = [
-            'guru' => 2,
+        $roleMap    = [
+            'guru'  => 2,
             'siswa' => 3,
         ];
         $role = $roleMap[$roleString] ?? 3;
@@ -43,16 +42,17 @@ class UserImport implements ToModel, WithStartRow
         $checkUser = User::where('email', $row[6])->first();
 
         $data = [
-            'nama' => $row[1],
-            'nomor_induk' => $row[2],
-            'id_kelas' => $kelas->id,
-            'no_hp' => $row[5],
-            'email' => $row[6],
-            'password' => bcrypt($row[7]),
-            'roles_id' => $role,
-            'file_eraport' => null,
+            'nama'            => $row[1],
+            'nomor_induk'     => $row[2],
+            'id_kelas'        => $kelas->id,
+            'no_hp'           => $row[5],
+            'email'           => $row[6],
+            'password'        => bcrypt($row[7]),
+            'roles_id'        => $role,
+            'status'          => $role == 2 ? 'Guru aktif' : 'Siswa aktif',
+            'file_eraport'    => null,
             'file_sertifikat' => null,
-            'img' => null,
+            'img'             => null,
         ];
 
         if ($checkUser) {
