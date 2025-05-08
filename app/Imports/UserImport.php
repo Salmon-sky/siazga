@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Imports;
 
 use App\Models\Jurusan;
@@ -54,6 +55,7 @@ class UserImport implements ToModel, WithStartRow
             'file_sertifikat' => null,
             'img'             => null,
         ];
+        // dd($data);
 
         if ($checkUser) {
             $checkUser->update($data);

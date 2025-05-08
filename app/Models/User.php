@@ -22,6 +22,8 @@ class User extends Authenticatable
         'roles_id',
         'file_eraport',
         'file_sertifikat',
+        'status',
+        'is_active', 
         'img',
     ];
 
@@ -33,9 +35,9 @@ class User extends Authenticatable
     /**
      * @var array<string, string>
      */
-     protected $casts = [
-         'email_verified_at' => 'datetime',
-         'password' => 'hashed',
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 
     public function Nilai()
@@ -54,6 +56,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Jurusan::class, 'id_kelas', 'id');
     }
-
-
 }
