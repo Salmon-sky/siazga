@@ -22,10 +22,10 @@ class NilaiController extends Controller
     public function show(Request $request, $id)
     {
         $kelas     = Jurusan::findOrFail($id);
-        $gurus     = User::where('roles_id', 2)->latest('id')->get();
+        $gurus     = User::where('roles_id', 2)->get();
         $semesters = Semester::all();
-        $jadwals   = JadwalPelajaran::all();
-        $nilais    = Nilai::query()->with(['Siswa'])->get();
+        $jadwals   = JadwalPelajaran::query()->with(['Mapel', 'Siswa'])->where('id_kelas', $id)->get();
+        $nilais    = Nilai::query()->with(['Siswa', 'Guru'])->get();
 
         $students = User::where('roles_id', 3)->where('id_kelas', $id)->get();
         $mapels   = Mapel::all();

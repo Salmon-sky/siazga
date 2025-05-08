@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Nilai;
+use App\Models\Scopes\BySemesterScope;
 use App\Models\Semester;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,8 +32,8 @@ class SemesterController extends Controller
     public function detail(Request $request, $id)
     {
 
-        $nilais   = Nilai::all();
         $semester = Semester::findOrFail($id);
+        $nilais   = Nilai::withoutGlobalScope(new BySemesterScope)->where('semester_id', $id)->get();
         return view('admin.semester.detail', compact('nilais', 'semester'));
     }
 
@@ -80,7 +81,7 @@ class SemesterController extends Controller
                 'nama'      => $request->nama,
                 'is_active' => $request->is_active,
             ]);
-
+            DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();
             return back()->with('gagal', 'Gagal Edit Semester!');
