@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Imports\UserImport;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\UserImport;
 
 class GuruController extends Controller
 {
@@ -20,23 +19,24 @@ class GuruController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama'        => 'required',
             'nomor_induk' => 'required|unique:users,nomor_induk',
-            'no_hp' => 'required|unique:users,no_hp',
-            'email' => 'required|email|unique:users,email',
+            'no_hp'       => 'required|unique:users,no_hp',
+            'email'       => 'required|email|unique:users,email',
+            'password'    => 'required|min:8',
         ], [
             'nomor_induk.unique' => 'Nomor induk sudah digunakan.',
-            'no_hp.unique' => 'Nomor handphone sudah digunakan.',
-            'email.unique' => 'Email sudah digunakan.',
+            'no_hp.unique'       => 'Nomor handphone sudah digunakan.',
+            'email.unique'       => 'Email sudah digunakan.',
         ]);
 
         User::create([
-            'nama' => $request->nama,
-            'roles_id' => 2,
+            'nama'        => $request->nama,
+            'roles_id'    => 2,
             'nomor_induk' => $request->nomor_induk,
-            'no_hp' => $request->no_hp,
-            'email' => $request->email,
-            'password' => Hash::make('password'),
+            'no_hp'       => $request->no_hp,
+            'email'       => $request->email,
+            'password'    => Hash::make($request->password),
         ]);
 
         return back()->with('sukses', 'Berhasil Tambah Guru!');
@@ -45,14 +45,15 @@ class GuruController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama'        => 'required',
             'nomor_induk' => 'required|unique:users,nomor_induk,' . $id,
-            'no_hp' => 'required|unique:users,no_hp,' . $id,
-            'email' => 'required|email|unique:users,email,' . $id,
+            'no_hp'       => 'required|unique:users,no_hp,' . $id,
+            'email'       => 'required|email|unique:users,email,' . $id,
+            'password'    => 'nullable|min:8',
         ], [
             'nomor_induk.unique' => 'Nomor induk sudah digunakan.',
-            'no_hp.unique' => 'Nomor handphone sudah digunakan.',
-            'email.unique' => 'Email sudah digunakan.',
+            'no_hp.unique'       => 'Nomor handphone sudah digunakan.',
+            'email.unique'       => 'Email sudah digunakan.',
         ]);
 
         $guru = User::findOrFail($id);

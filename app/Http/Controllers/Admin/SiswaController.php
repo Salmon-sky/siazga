@@ -73,6 +73,7 @@ class SiswaController extends Controller
             'nomor_induk' => 'required|unique:users,nomor_induk,' . $id,
             'no_hp'       => 'required|unique:users,no_hp,' . $id,
             'email'       => 'required|email|unique:users,email,' . $id,
+            'password'    => 'nullable|min:8',
         ]);
 
         $siswa = User::findOrFail($id);
