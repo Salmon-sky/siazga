@@ -1,8 +1,8 @@
 <?php
-
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Semester;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,14 +12,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(SemesterSeeder::class);
         $this->call(MapelSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(JurusanSeeder::class);
+        $semesters = Semester::all();
+        foreach ($semesters as $semester) {
+            $semester->update(['is_active' => 1]);
+            $this->call(JadwalPelajaranSeeder::class);
+            $this->call(NilaiSeeder::class);
+            $this->call(PresensiSeeder::class);
+            $semester->update(['is_active' => 0]);
+        }
+        $semester->latest()->update(['is_active' => 1]);
         $this->call(PengumumanSeeder::class);
-        $this->call(JadwalPelajaranSeeder::class);
-        $this->call(NilaiSeeder::class);
-        $this->call(PresensiSeeder::class);
-        $this->call(SemesterSeeder::class);
 
     }
 }

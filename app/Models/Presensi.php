@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Scopes\BySemesterScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Presensi extends Model
 {
     use HasFactory;
 
-    protected $table = 'presensis'; 
+    protected $table = 'presensis';
     protected $fillable = ['id_siswa', 'id_mapel', 'status','created_at', 'updated_at'];
 
     public function Siswa()
@@ -23,5 +24,10 @@ class Presensi extends Model
     public function Mapel()
     {
         return $this->belongsTo(Mapel::class, 'id_mapel','id');
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new BySemesterScope);
     }
 }

@@ -19,10 +19,10 @@ return new class extends Migration
             $table->foreignId('id_kelas')->nullable(); // Tambahkan relasi jika tabel kelas ada
             $table->string('no_hp');
             $table->integer('nomor_induk');
-            $table->string('email')->unique();
-            $table->string('password');
             $table->string('file_eraport')->nullable();
             $table->string('file_sertifikat')->nullable();
+            $table->string('email')->unique();
+            $table->string('password');
             $table->rememberToken(); // Tambahkan kolom remember_token
             $table->timestamps();
         });

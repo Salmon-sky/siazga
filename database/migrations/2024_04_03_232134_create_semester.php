@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('semester', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->boolean('is_active')->default(0);
             $table->timestamps();
         });
     }

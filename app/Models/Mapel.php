@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Scopes\BySemesterScope;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mapel extends Model
 {
@@ -20,5 +21,4 @@ class Mapel extends Model
     {
         return $this->hasMany(JadwalPelajaran::class);
     }
-
 }

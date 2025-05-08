@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\BySemesterScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,5 +24,10 @@ class JadwalPelajaran extends Model
     public function User()
     {
         return $this->belongsTo(User::class, 'id_guru','id');
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new BySemesterScope);
     }
 }

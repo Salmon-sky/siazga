@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\JadwalPelajaran;
+use App\Models\Semester;
 
 class JadwalPelajaranSeeder extends Seeder
 {
@@ -13,7 +14,7 @@ class JadwalPelajaranSeeder extends Seeder
      */
     public function run(): void
     {
-        $jadwal = [
+        $jadwals = [
             // kelas 1
             [
                 'jam_ke' => 1,
@@ -1101,9 +1102,15 @@ class JadwalPelajaranSeeder extends Seeder
                 'jam_mulai' => '14.00',
                 'jam_selesai' => '15.00',
             ],
-
-
         ];
-        JadwalPelajaran::query()->insert($jadwal);
+        $semester = Semester::where('is_active', 1)->first();
+        foreach ($jadwals as $jadwal) {
+            JadwalPelajaran::create(
+                array_merge(
+                    $jadwal,
+                    ['semester_id' => $semester->id]
+                )
+            );
+        }
     }
 }
