@@ -121,9 +121,6 @@
                         <a class="nav-link text-white active" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#sop">SOP</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link text-white" href="#profil">Profil</a>
                     </li>
                     <li class="nav-item">

@@ -36,6 +36,10 @@
                   <label for="email">Email</label>
                   <input type="email" class="form-control" name="email" id="email" placeholder="Masukkan Email" />
                 </div>
+                <div class="form-group">
+                    <label for="email">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Masukkan Password" />
+                  </div>
               </div>
               <div class="col-12 d-flex">
                 <div class="mb-3 col-12 px-2">
