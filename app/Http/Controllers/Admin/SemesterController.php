@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Semester;
 use App\Models\Nilai;
+use App\Models\Semester;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SemesterController extends Controller
 {
@@ -23,7 +23,7 @@ class SemesterController extends Controller
     public function show(Request $request, $id)
     {
 
-        $nilais = Nilai::latest('id')->get();
+        $nilais   = Nilai::latest('id')->get();
         $semester = Semester::findOrFail($id);
         return view('admin.semester.detail', compact('nilais', 'semester'));
     }
@@ -31,11 +31,10 @@ class SemesterController extends Controller
     public function detail(Request $request, $id)
     {
 
-        $nilais = Nilai::all();
+        $nilais   = Nilai::all();
         $semester = Semester::findOrFail($id);
         return view('admin.semester.detail', compact('nilais', 'semester'));
     }
-
 
     public function store(Request $request)
     {
@@ -44,10 +43,20 @@ class SemesterController extends Controller
         ], [
             'nama.unique' => 'Nama semester sudah digunakan.',
         ]);
-
-        Semester::create([
-            'nama' => $request->nama,
-        ]);
+        try {
+            //code...
+            DB::beginTransaction();
+            Semester::where('is_active', 1)->update(['is_active' => 0]);
+            Semester::create([
+                'nama'      => $request->nama,
+                'is_active' => 1,
+            ]);
+            DB::commit();
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollback();
+            return back()->with('gagal', 'Gagal Tambah Semester!');
+        }
 
         return back()->with('sukses', 'Berhasil Tambah Semester!');
     }

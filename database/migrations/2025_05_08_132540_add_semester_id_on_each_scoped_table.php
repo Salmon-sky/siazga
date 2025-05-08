@@ -28,10 +28,6 @@ return new class extends Migration
             $table->unsignedBigInteger('semester_id');
             $table->foreign('semester_id')->references('id')->on('semester')->onDelete('cascade');
         });
-        Schema::table('periodes', function (Blueprint $table) {
-            $table->unsignedBigInteger('semester_id');
-            $table->foreign('semester_id')->references('id')->on('semester')->onDelete('cascade');
-        });
     }
 
     /**
