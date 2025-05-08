@@ -1,14 +1,13 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\User;
+use App\Imports\UserImport;
 use App\Models\Jurusan;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\UserImport;
 
 class SiswaController extends Controller
 {
@@ -20,31 +19,31 @@ class SiswaController extends Controller
         return view('admin.siswa.index', compact('siswas', 'kelass'));
     }
 
-
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama'        => 'required',
             'nomor_induk' => 'required|unique:users,nomor_induk',
-            'no_hp' => 'required|unique:users,no_hp',
-            'id_kelas' => 'required',
-            'email' => 'required|email|unique:users,email',
+            'no_hp'       => 'required|unique:users,no_hp',
+            'id_kelas'    => 'required',
+            'email'       => 'required|email|unique:users,email',
+            'password'    => 'required|min:8',
         ]);
 
         $siswa = User::create([
-            'nama' => $request->nama,
-            'roles_id' => 3,
+            'nama'        => $request->nama,
+            'roles_id'    => 3,
             'nomor_induk' => $request->nomor_induk,
-            'no_hp' => $request->no_hp,
-            'id_kelas' => $request->id_kelas,
-            'email' => $request->email,
-            'password' => Hash::make('password'),
+            'no_hp'       => $request->no_hp,
+            'id_kelas'    => $request->id_kelas,
+            'email'       => $request->email,
+            'password'    => Hash::make($request->password),
 
         ]);
 
         return back()->with(
             [
-                'sukses' => 'Berhasil Tambah siswa!'
+                'sukses' => 'Berhasil Tambah siswa!',
             ]
         );
     }
@@ -70,10 +69,10 @@ class SiswaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama'        => 'required',
             'nomor_induk' => 'required|unique:users,nomor_induk,' . $id,
-            'no_hp' => 'required|unique:users,no_hp,' . $id,
-            'email' => 'required|email|unique:users,email,' . $id,
+            'no_hp'       => 'required|unique:users,no_hp,' . $id,
+            'email'       => 'required|email|unique:users,email,' . $id,
         ]);
 
         $siswa = User::findOrFail($id);
