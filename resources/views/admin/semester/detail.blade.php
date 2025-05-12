@@ -122,7 +122,7 @@
                         <tr>
                             <th>Total</th> <!-- Kolom pertama -->
                             <th colspan="3"> <!-- Menggabungkan kolom kedua hingga kelima -->
-                                {{ $count > 0 ? number_format((($totalTugas * 0.3) + ($totalUTS * 0.3) + ($totalUAS * 0.4)) / $count, 2) : '-' }}
+                                {{ $count > 0 ? number_format(($totalTugas * 0.3 + $totalUTS * 0.3 + $totalUAS * 0.4) / $count, 2) : '-' }}
                             </th>
                         </tr>
                     </tfoot>

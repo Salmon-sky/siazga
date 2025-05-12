@@ -23,7 +23,7 @@ class User extends Authenticatable
         'file_eraport',
         'file_sertifikat',
         'status',
-        'is_active', 
+        'is_active',
         'img',
     ];
 
@@ -55,5 +55,15 @@ class User extends Authenticatable
     public function Kelas()
     {
         return $this->belongsTo(Jurusan::class, 'id_kelas', 'id');
+    }
+
+    public function gurus()
+    {
+        return $this->belongsToMany(Mapel::class, 'guru_mapels', 'guru_id', 'mapel_id');
+    }
+
+    public function presensis()
+    {
+        return $this->hasMany(Presensi::class, 'id_siswa', 'id');
     }
 }

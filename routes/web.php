@@ -99,9 +99,11 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/tabel-arsip/{id}/update', [ArsipController::class, 'update'])->name('arsip.update');
 
         // CMS PRESENSI
+
         Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi.index');
+        Route::post('/presensi/create', [PresensiController::class, 'store'])->name('presensi.store');
         Route::get('/tabel-presensi/{id}', [PresensiController::class, 'show'])->name('presensi.tabel');
-        Route::put('/tabel-presensi/{id}/update', [PresensiController::class, 'update'])->name('presensi.update');
+        Route::post('/tabel-presensi/{id}/update', [PresensiController::class, 'update'])->name('presensi.update');
 
         // View Jadwal
         Route::get('/jadwal', [JadwalPelajaranController::class, 'jadwal'])->name('jadwal.jadwal');

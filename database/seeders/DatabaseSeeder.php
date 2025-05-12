@@ -2,6 +2,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use App\Models\Semester;
 use Illuminate\Database\Seeder;
 
@@ -15,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SemesterSeeder::class);
         $this->call(MapelSeeder::class);
         $this->call(UserSeeder::class);
+        // $this->call(GuruMapelSeeder::class);
         $this->call(JurusanSeeder::class);
 
         $semesters = Semester::all();

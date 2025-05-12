@@ -70,7 +70,6 @@ class NilaiSeeder extends Seeder
         ];
         $semester = Semester::where('is_active', 1)->first();
         foreach ($nilais as $nilai) {
-
             Nilai::create(array_merge(
                 $nilai, [
                     'semester_id' => $semester->id,

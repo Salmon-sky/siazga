@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('id_siswa');
             $table->foreignId('id_mapel');
             $table->string('status');
+            $table->date('tanggal')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });

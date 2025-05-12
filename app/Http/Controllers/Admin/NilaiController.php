@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -15,7 +16,7 @@ class NilaiController extends Controller
 
     public function index()
     {
-
+        
         $jurusans = Jurusan::all();
         return view('admin.nilai.index', compact('jurusans'));
     }
@@ -25,7 +26,14 @@ class NilaiController extends Controller
         $gurus     = User::where('roles_id', 2)->get();
         $semesters = Semester::all();
         $jadwals   = JadwalPelajaran::query()->with(['Mapel'])->where('id_kelas', $id)->get();
-        $nilais    = Nilai::query()->with(['Siswa', 'Guru'])->get();
+        $nilais    = Nilai::query()
+            ->whereRelation('Guru', 'users.id', auth()->id())
+            ->with(
+                [
+                    'Siswa',
+                    'Guru'
+                ]
+            )->get();
 
         $students = User::where('roles_id', 3)->where('id_kelas', $id)->get();
         $mapels   = Mapel::all();
