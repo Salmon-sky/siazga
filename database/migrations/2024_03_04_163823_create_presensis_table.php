@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_siswa');
             $table->foreignId('id_mapel');
+            $table->foreignId('id_jadwal')->nullable();
+            $table->foreign('id_siswa')->references('id')->on('users')->onDelete('cascade');
             $table->string('status');
             $table->date('tanggal')->nullable();
             $table->timestamp('created_at')->nullable();

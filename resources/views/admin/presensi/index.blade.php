@@ -22,7 +22,7 @@
                         @foreach ($jadwals as $jadwal)
                             <option value="{{ $jadwal->id }}" @selected(old('id_jadwal') == $jadwal->id)>
                                 {{ $jadwal->Mapel->nama . ' ' . $jadwal->Jurusan->nama . '-' . $jadwal->hari . ' ' . $jadwal->jam_mulai . '-' . $jadwal->jam_selesai }}
-                            </option>
+                                ({{ 'id_sem= ' . $jadwal->semester_id . ' id-' . $jadwal->id }})
                         @endforeach
                     </select>
                 </div>

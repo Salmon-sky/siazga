@@ -1,57 +1,53 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\JadwalPelajaran;
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Mapel;
 use App\Models\Jurusan;
 use App\Models\Presensi;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class PresensiController extends Controller
 {
 
     public function index(Request $request)
     {
-        // dd($request->all());
         $jadwals = JadwalPelajaran::query()
             ->with(['Mapel', 'Jurusan'])
             ->where('id_guru', auth()->id())
             ->get();
-        $siswas = [];
-        // if ($request->has('id_jadwal')) {
-        //     $selectedJadwal =  JadwalPelajaran::find($request->id_jadwal);
-        //     dd($selectedJadwal);
-        // }
-        if ($request->has('id_jadwal')) {
-            $siswas = User::query()
-                ->when($request->has('id_jadwal'), function ($query) use ($request) {
-                    $query->whereRelation('Kelas', 'users.id_kelas', JadwalPelajaran::find($request->id_jadwal)->id_kelas);
-                })
-                ->with(
-                    [
-                        'presensis'  => function ($query) use ($request) {
-                            $query->where('id_jadwal', $request->id_jadwal)->where('tanggal', $request->get('tanggal') ?? now()->format('Y-m-d'));
-                        }
-                    ]
-                )
-                ->get()
-                ->map(function ($siswa) {
-                    $siswa->presensi = $siswa->presensis->first();
-                    return $siswa;
-                })->collect();
-        }
 
-        dd($siswas);
-        return view('admin.presensi.index', compact('jadwals', 'siswas'));
+        $siswas         = collect();
+        $selectedJadwal = null;
+
+        if ($request->has('id_jadwal')) {
+            $selectedJadwal = JadwalPelajaran::find($request->get('id_jadwal'));
+
+            if ($selectedJadwal) {
+                $siswas = User::query()
+                    ->where('roles_id', 3)
+                    ->where('id_kelas', $selectedJadwal->id_kelas)
+                    ->get()
+                    ->map(function ($siswa) {
+                        $siswa->presensi = Presensi::query()
+                            ->where('id_jadwal', $siswa->id_jadwal)
+                            ->where('id_siswa', $siswa->id)
+                            ->first();
+                        return $siswa;
+                    });
+            }
+        }
+        // dd($siswas);
+
+        return view('admin.presensi.index', compact('jadwals', 'siswas', 'selectedJadwal'));
     }
+
     public function show(Request $request, $id)
     {
 
         $presensis = Presensi::all();
-        $kelas = Jurusan::findOrFail($id);
+        $kelas     = Jurusan::findOrFail($id);
         return view('admin.presensi.tabelpresensi', compact('presensis', 'kelas'));
     }
 
@@ -59,7 +55,7 @@ class PresensiController extends Controller
     {
         $request->validate([
             'id_jadwal' => 'required',
-            'status' => 'required',
+            'status'    => 'required',
         ]);
 
         $jadwal = JadwalPelajaran::findOrFail($request->id_jadwal);
@@ -69,14 +65,13 @@ class PresensiController extends Controller
             'id_mapel'  => $jadwal->id_mapel,
             'tanggal'   => $request->tanggal,
             'status'    => $request->status,
+            'id_jadwal' => $request->id_jadwal,
         ]);
         return back()->with('sukses', 'Berhasil Tambah Data Presensi!');
     }
 
-
     public function update(Request $request, $id)
     {
-
         $presensi = Presensi::findOrFail($id);
         $request->validate([
             'status' => 'required',
