@@ -29,10 +29,11 @@ class PresensiController extends Controller
                     ->where('roles_id', 3)
                     ->where('id_kelas', $selectedJadwal->id_kelas)
                     ->get()
-                    ->map(function ($siswa) {
+                    ->map(function ($siswa) use($request) {
                         $siswa->presensi = Presensi::query()
                             ->where('id_jadwal', $siswa->id_jadwal)
                             ->where('id_siswa', $siswa->id)
+                            ->where('tanggal', $request->get('tanggal'))
                             ->first();
                         return $siswa;
                     });
