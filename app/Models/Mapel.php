@@ -1,16 +1,14 @@
 <?php
-
 namespace App\Models;
 
-use App\Models\Scopes\BySemesterScope;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Mapel extends Model
 {
     use HasFactory;
 
-    protected $table = 'mapel';
+    protected $table    = 'mapel';
     protected $fillable = ['nama'];
 
     public function Nilai()
@@ -24,6 +22,6 @@ class Mapel extends Model
 
     public function gurus()
     {
-        return $this->belongsToMany(User::class, 'guru_mapels', 'mapel_id', 'guru_id');
+        return $this->belongsToMany(User::class, 'guru_mapels', 'id_mapel', 'id_guru');
     }
 }

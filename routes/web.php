@@ -92,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/nilai', [NilaiController::class, 'store'])->name('nilai.store');
         Route::get('/tabel-nilai/{id}', [NilaiController::class, 'show'])->name('nilai.tabel');
         Route::put('/tabel-nilai/{id}/update', [NilaiController::class, 'update'])->name('nilai.update');
+        Route::delete('/tabel-nilai/{id}/destroy', [NilaiController::class, 'destroy'])->name('nilai.destroy');
 
         // CMS ARSIP
         Route::get('/arsip', [ArsipController::class, 'index'])->name('arsip.index');

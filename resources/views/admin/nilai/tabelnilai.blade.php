@@ -58,6 +58,12 @@
                                             <td>{{ $nilai->keterangan ?? '-' }}</td>
                                             <td>
                                                 @include('admin.nilai.edit')
+                                                <form action="{{ route('guru.nilai.destroy', $nilai->id) }}"
+                                                    method="DELETE">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn mx-1 btn-danger">Hapus</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endif
