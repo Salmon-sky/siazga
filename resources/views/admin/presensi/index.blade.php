@@ -29,7 +29,7 @@
                 <div class="form-group">
                     <label for="tanggal">Tanggal pertemuan</label>
                     <input type="date" class="form-control" name="tanggal" id="tanggal"
-                        value="{{ old('tanggal') ?? now()->format('Y-m-d') }}">
+                        value="{{ request()->get('tanggal') ?? now()->format('Y-m-d') }}">
                 </div>
             </div>
             <!-- /.card-body -->
@@ -101,9 +101,10 @@
                                                     method="POST">
                                                     @csrf <input type='hidden' name='id_siswa'
                                                         value='{{ $siswa->id }}'>
-                                                    <input type='hidden' name='id_jadwal' value='{{ request()->get('id_jadwal') }}'>
+                                                    <input type='hidden' name='id_jadwal'
+                                                        value='{{ request()->get('id_jadwal') }}'>
                                                     <input type='hidden' name='tanggal'
-                                                        value='{{ now()->format('Y-m-d') }}'>
+                                                        value='{{ request()->get('tanggal') ?? now()->format('Y-m-d') }}'>
                                                     <input type="hidden" name="status" value="Hadir">
                                                     <button type="submit" class="btn mx-1 btn-success">Hadir</button>
                                                 </form>
@@ -112,9 +113,10 @@
                                                     method="POST">
                                                     @csrf <input type='hidden' name='id_siswa'
                                                         value='{{ $siswa->id }}'>
-                                                    <input type='hidden' name='id_jadwal' value='{{ request()->get('id_jadwal') }}'>
+                                                    <input type='hidden' name='id_jadwal'
+                                                        value='{{ request()->get('id_jadwal') }}'>
                                                     <input type='hidden' name='tanggal'
-                                                        value='{{ now()->format('Y-m-d') }}'>
+                                                        value='{{ request()->get('tanggal') ?? now()->format('Y-m-d') }}'>
                                                     <input type="hidden" name="status" value="Telat">
                                                     <button type="submit" class="btn mx-1 btn-warning">Telat</button>
                                                 </form>
@@ -123,9 +125,10 @@
                                                     method="POST">
                                                     @csrf <input type='hidden' name='id_siswa'
                                                         value='{{ $siswa->id }}'>
-                                                    <input type='hidden' name='id_jadwal' value='{{ request()->get('id_jadwal') }}'>
+                                                    <input type='hidden' name='id_jadwal'
+                                                        value='{{ request()->get('id_jadwal') }}'>
                                                     <input type='hidden' name='tanggal'
-                                                        value='{{ now()->format('Y-m-d') }}'>
+                                                        value='{{ request()->get('tanggal') ?? now()->format('Y-m-d') }}'>
                                                     <input type="hidden" name="status" value="Absen">
                                                     <button type="submit" class="btn mx-1 btn-danger">Absen</button>
                                                 </form>
@@ -134,9 +137,10 @@
                                                     method="POST">
                                                     @csrf <input type='hidden' name='id_siswa'
                                                         value='{{ $siswa->id }}'>
-                                                    <input type='hidden' name='id_jadwal' value='{{ request()->get('id_jadwal') }}'>
+                                                    <input type='hidden' name='id_jadwal'
+                                                        value='{{ request()->get('id_jadwal') }}'>
                                                     <input type='hidden' name='tanggal'
-                                                        value='{{ now()->format('Y-m-d') }}'>
+                                                        value='{{ request()->get('tanggal') ?? now()->format('Y-m-d') }}'>
                                                     <input type="hidden" name="status" value="-">
                                                     <button type="submit" class="btn mx-1 btn-info">Reset</button>
                                                 </form>
