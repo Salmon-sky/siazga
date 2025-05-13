@@ -7,12 +7,14 @@ use App\Models\Jurusan;
 use App\Models\Presensi;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PresensiController extends Controller
 {
 
     public function index(Request $request)
     {
+        // DB::enableQueryLog();
         $jadwals = JadwalPelajaran::query()
             ->with(['Mapel', 'Jurusan'])
             ->where('id_guru', auth()->id())
@@ -29,16 +31,22 @@ class PresensiController extends Controller
                     ->where('roles_id', 3)
                     ->where('id_kelas', $selectedJadwal->id_kelas)
                     ->get()
-                    ->map(function ($siswa) use($request) {
+                    ->map(function ($siswa) use ($selectedJadwal, $request) {
+                        // dd($request->get('tanggal'));
                         $siswa->presensi = Presensi::query()
-                            ->where('id_jadwal', $siswa->id_jadwal)
+                            ->where('id_jadwal', $selectedJadwal->id)
                             ->where('id_siswa', $siswa->id)
                             ->where('tanggal', $request->get('tanggal'))
-                            ->first();
+                        // ->toSql()
+                        // ->dd()
+                            ->first()
+                        ;
+                        // dd($siswa->presensi);
                         return $siswa;
                     });
             }
         }
+        // dd(DB::getQueryLog());
         // dd($siswas);
 
         return view('admin.presensi.index', compact('jadwals', 'siswas', 'selectedJadwal'));
@@ -55,6 +63,7 @@ class PresensiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'id_siswa'  => 'required',
             'id_jadwal' => 'required',
             'status'    => 'required',
         ]);
@@ -62,7 +71,7 @@ class PresensiController extends Controller
         $jadwal = JadwalPelajaran::findOrFail($request->id_jadwal);
 
         Presensi::create([
-            'id_siswa'  => auth()->id(),
+            'id_siswa'  => $request->id_siswa,
             'id_mapel'  => $jadwal->id_mapel,
             'tanggal'   => $request->tanggal,
             'status'    => $request->status,

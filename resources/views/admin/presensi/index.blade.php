@@ -101,7 +101,7 @@
                                                     method="POST">
                                                     @csrf <input type='hidden' name='id_siswa'
                                                         value='{{ $siswa->id }}'>
-                                                    <input type='hidden' name='id_jadwal' value='{{ $jadwal->id }}'>
+                                                    <input type='hidden' name='id_jadwal' value='{{ request()->get('id_jadwal') }}'>
                                                     <input type='hidden' name='tanggal'
                                                         value='{{ now()->format('Y-m-d') }}'>
                                                     <input type="hidden" name="status" value="Hadir">
@@ -112,7 +112,7 @@
                                                     method="POST">
                                                     @csrf <input type='hidden' name='id_siswa'
                                                         value='{{ $siswa->id }}'>
-                                                    <input type='hidden' name='id_jadwal' value='{{ $jadwal->id }}'>
+                                                    <input type='hidden' name='id_jadwal' value='{{ request()->get('id_jadwal') }}'>
                                                     <input type='hidden' name='tanggal'
                                                         value='{{ now()->format('Y-m-d') }}'>
                                                     <input type="hidden" name="status" value="Telat">
@@ -123,7 +123,7 @@
                                                     method="POST">
                                                     @csrf <input type='hidden' name='id_siswa'
                                                         value='{{ $siswa->id }}'>
-                                                    <input type='hidden' name='id_jadwal' value='{{ $jadwal->id }}'>
+                                                    <input type='hidden' name='id_jadwal' value='{{ request()->get('id_jadwal') }}'>
                                                     <input type='hidden' name='tanggal'
                                                         value='{{ now()->format('Y-m-d') }}'>
                                                     <input type="hidden" name="status" value="Absen">
@@ -134,7 +134,7 @@
                                                     method="POST">
                                                     @csrf <input type='hidden' name='id_siswa'
                                                         value='{{ $siswa->id }}'>
-                                                    <input type='hidden' name='id_jadwal' value='{{ $jadwal->id }}'>
+                                                    <input type='hidden' name='id_jadwal' value='{{ request()->get('id_jadwal') }}'>
                                                     <input type='hidden' name='tanggal'
                                                         value='{{ now()->format('Y-m-d') }}'>
                                                     <input type="hidden" name="status" value="-">
