@@ -62,7 +62,6 @@
                                             @include('admin.siswa.edit')
                                             @include('admin.siswa.delete')
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>

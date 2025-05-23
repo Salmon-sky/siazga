@@ -29,7 +29,6 @@
                                     <th class="small">No</th>
                                     <th class="small">Nama</th>
                                     <th class="small">Nomor Induk</th>
-                                    <th class="small">Mapel</th>
                                     <th class="small">status</th>
                                     <th class="small">tanggal</th>
                                     <th class="small">Aksi</th>
@@ -98,7 +97,6 @@
                                     <th class="small">No</th>
                                     <th class="small">Nama</th>
                                     <th class="small">Nomor Induk</th>
-                                    <th class="small">Mapel</th>
                                     <th class="small">status</th>
                                     <th class="small">tanggal</th>
                                     <th class="small">Aksi</th>

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -37,6 +38,9 @@ class GuruController extends Controller
             'no_hp'       => $request->no_hp,
             'email'       => $request->email,
             'password'    => Hash::make($request->password),
+            'status'      => 'aktif',
+            'updated_at'  => now(),
+            'created_at'   => now(),
         ]);
 
         return back()->with('sukses', 'Berhasil Tambah Guru!');

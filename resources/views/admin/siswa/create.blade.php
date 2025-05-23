@@ -55,8 +55,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" name="password" id="password"
-                                placeholder="Masukkan Password" maxlength="8" required />
-                            <small class="form-text text-danger">Password maksimal 8 karakter.</small>
+                                placeholder="Masukkan Password" minlength="8" required />
                             <div class="invalid-feedback">Password wajib diisi dan maksimal 8 karakter.</div>
                         </div>
 
@@ -79,6 +78,21 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
+                <script>
+                    (function() {
+                        'use strict';
+                        window.addEventListener('load', function() {
+                            var form = document.getElementById('formTambahSiswa');
+                            form.addEventListener('submit', function(event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            }, false);
+                        }, false);
+                    })();
+                </script>
             </div>
         </form>
     </div>

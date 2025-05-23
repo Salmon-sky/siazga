@@ -58,11 +58,11 @@
                                             <td>{{ $nilai->keterangan ?? '-' }}</td>
                                             <td>
                                                 @include('admin.nilai.edit')
-                                                <form action="{{ route('guru.nilai.destroy', $nilai->id) }}"
-                                                    method="DELETE">
+                                                <form action="{{ route('guru.nilai.destroy', $nilai->id) }}" method="POST"
+                                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn mx-1 btn-danger">Hapus</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                                 </form>
                                             </td>
                                         </tr>

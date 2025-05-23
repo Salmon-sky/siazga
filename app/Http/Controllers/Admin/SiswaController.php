@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -38,7 +39,9 @@ class SiswaController extends Controller
             'id_kelas'    => $request->id_kelas,
             'email'       => $request->email,
             'password'    => Hash::make($request->password),
-
+            'status'      => 'aktif',
+            'updated_at'  => now(),
+            'created_at'   => now(),
         ]);
 
         return back()->with(

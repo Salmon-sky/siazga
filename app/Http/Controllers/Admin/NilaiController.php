@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -98,5 +99,12 @@ class NilaiController extends Controller
         ]);
 
         return back()->with('sukses', 'Berhasil Tambah Data Nilai!');
+    }
+
+    public function destroy($id)
+    {
+        $nilai = Nilai::findOrFail($id);
+        $nilai->delete();
+        return back()->with('sukses', 'Berhasil Hapus Data Nilai!');
     }
 }

@@ -21,8 +21,7 @@
                         <option disabled>Pilih Jadwal</option>
                         @foreach ($jadwals as $jadwal)
                             <option value="{{ $jadwal->id }}" @selected(old('id_jadwal') == $jadwal->id)>
-                                {{ $jadwal->Mapel->nama . ' ' . $jadwal->Jurusan->nama . '-' . $jadwal->hari . ' ' . $jadwal->jam_mulai . '-' . $jadwal->jam_selesai }}
-                                ({{ 'id_sem= ' . $jadwal->semester_id . ' id-' . $jadwal->id }})
+                                {{ $jadwal->Mapel->nama . ' ' . $jadwal->Jurusan->nama . '-' . $jadwal->Jurusan->kelas . ' ' . $jadwal->hari . ' ' . $jadwal->jam_mulai . '-' . $jadwal->jam_selesai }}
                         @endforeach
                     </select>
                 </div>
@@ -154,7 +153,6 @@
                                         <th class="small">No</th>
                                         <th class="small">Nama</th>
                                         <th class="small">Nomor Induk</th>
-                                        <th class="small">Mapel</th>
                                         <th class="small">status</th>
                                         <th class="small">tanggal</th>
                                         <th class="small">Aksi</th>
